@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/login.css">
+    <link rel="stylesheet" href="<c:url value="styles/login.css"/>" type="text/css"/>
 </head>
 <body>
 
