@@ -4,7 +4,8 @@
 <html>
 <head>
     <title>Login Page</title>
-    <link rel="stylesheet" href="<c:url value="styles/login.css"/>" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/login.css">
+
 </head>
 <body>
 
