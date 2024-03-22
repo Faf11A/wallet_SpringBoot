@@ -29,10 +29,10 @@
       <label for="targetDate">Target Date:</label>
       <input type="date" class="form-control" id="targetDate" name="targetDate" value="${targetDate}" required>
     </div>
-    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button class="btn btn-secondary mt-3" onclick="goBack()">Back</button>
+    <button type="submit" class="btn btn-primary mt-3 ml-2">Save Changes</button>
   </form>
 
-  <button class="btn btn-secondary mt-3" onclick="goBack()">Back</button>
 </div>
 
 <script>
@@ -42,4 +42,3 @@
 </script>
 </body>
 </html>
-

@@ -84,22 +84,22 @@
                             <div class="col">
                                 <form action="${pageContext.request.contextPath}/addAmountToGoal" method="post"
                                       class="form-inline">
-                                    <input type="hidden" name="goalId" value="${goal.goalId}">
+                                    <input type="hidden" name="goalId" value="${goal.id}">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success">Add Amount</button>
-                                        <input type="number" class="form-control" id="amount_${goal.goalId}"
+                                        <input type="number" class="form-control" id="amount_${goal.id}"
                                                name="amount" required>
                                     </div>
                                 </form>
                             </div>
                             <div class="col text-right">
-                                <form action="${pageContext.request.contextPath}/edit/${goal.goalId}" method="get" style="display: inline;">
+                                <form action="${pageContext.request.contextPath}/edit/${goal.id}" method="get" style="display: inline;">
                                     <button type="submit" class="btn btn-warning">Edit Goal</button>
                                 </form>
 
                                 <form action="${pageContext.request.contextPath}/deleteGoal" method="post"
                                       style="display: inline;">
-                                    <input type="hidden" name="goalId" value="${goal.goalId}">
+                                    <input type="hidden" name="goalId" value="${goal.id}">
                                     <button type="submit" class="btn btn-danger">Delete Goal</button>
                                 </form>
                             </div>
@@ -137,7 +137,7 @@
                         <p> </p>
                         <form action="${pageContext.request.contextPath}/deleteGoal" method="post"
                               style="display: inline;">
-                            <input type="hidden" name="goalId" value="${goal.goalId}">
+                            <input type="hidden" name="goalId" value="${goal.id}">
                             <button type="submit" class="btn btn-danger">Delete Goal</button>
                         </form>
                     </div>
@@ -168,16 +168,16 @@
                             <div class="col">
                                 <form action="${pageContext.request.contextPath}/editGoalDate" method="post"
                                       class="form-inline">
-                                    <input type="hidden" name="goalId" value="${goal.goalId}">
+                                    <input type="hidden" name="goalId" value="${goal.id}">
                                     <div class="form-group">
-                                        <input type="date" class="form-control" id="newDate_${goal.goalId}"
+                                        <input type="date" class="form-control" id="newDate_${goal.id}"
                                                name="newDate" required>
                                         <button type="submit" class="btn btn-ch">Change Date</button>
                                     </div>
                                 </form>
                                 <form action="${pageContext.request.contextPath}/deleteGoal" method="post"
                                       style="display: inline;">
-                                    <input type="hidden" name="goalId" value="${goal.goalId}">
+                                    <input type="hidden" name="goalId" value="${goal.id}">
                                     <button type="submit" class="btn btn-danger">Delete Goal</button>
                                 </form>
                             </div>

@@ -3,13 +3,8 @@ package com.wallet_SpringBoot.controller;
 import com.wallet_SpringBoot.model.Category;
 import com.wallet_SpringBoot.model.User;
 import com.wallet_SpringBoot.model.UserDetails;
-import com.wallet_SpringBoot.repository.BudgetRepository;
-import com.wallet_SpringBoot.repository.CategoryRepository;
 import com.wallet_SpringBoot.service.*;
 import jakarta.servlet.http.HttpSession;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -39,6 +34,7 @@ public class AuthController {
     @GetMapping("/login")
     public String showLoginForm(Model model, @RequestParam(value = "mode", defaultValue = "login") String mode) {
         model.addAttribute("mode", mode);
+        categoryService.autoFillCategories();
         return "login";
     }
 
@@ -52,7 +48,8 @@ public class AuthController {
 
         if (pswd != null && Objects.equals(pswd, password)) {
             Long userId = userService.findIdByLogin(login);
-            String username = userDetailsService.findNameById(userId);
+            UserDetails userDetails = userDetailsService.findUserDetailsByUserId(userId).orElse(null);
+            String username = userDetailsService.findNameById(userDetails.getId());
             session.setAttribute("userId", userId);
             session.setAttribute("username", username);
             return "redirect:/wallet";

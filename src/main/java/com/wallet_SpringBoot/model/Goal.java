@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "goals")
 public class Goal {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -32,6 +33,7 @@ public class WalletController {
     public String showWallet(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
         Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) return "redirect:/login";
 
         Optional<Budget> budgetOptional = budgetService.getBudgetByUserId(userId);
         Optional<Transaction> transactionOptional = transactionService.getLastTransaction(userId);
@@ -58,6 +60,7 @@ public class WalletController {
     @PostMapping("/wallet")
     public String addFunds(HttpSession session, BigDecimal amount) {
         Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) return "redirect:/login";
 
         budgetService.updateBalance(userId, amount);
 
@@ -75,6 +78,44 @@ public class WalletController {
         newTransaction.setCategory(categoryService.findCategoryById(11L));
 
         transactionService.save(newTransaction);
+        return "redirect:/wallet";
+    }
+
+    //ADD TRANSACTION ON MAIN PAGE
+    @PostMapping("/add-transaction")
+    public String addTransaction(@RequestParam("amount") Double amount,
+                                 @RequestParam("date") String date,
+                                 @RequestParam("category") Long categoryId,
+                                 @RequestParam("description") String description,
+                                 HttpSession session,
+                                 Model model) {
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) return "redirect:/login";
+        User user = userService.findUserById(userId);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate transactionDate = LocalDate.parse(date, formatter);
+
+
+        Transaction newTransaction = new Transaction();
+        newTransaction.setAmount(BigDecimal.valueOf(amount));
+        newTransaction.setDate(transactionDate);
+
+        Category category = categoryService.findCategoryById(categoryId);
+        newTransaction.setCategory(category);
+
+        newTransaction.setDescription(description);
+        newTransaction.setUser(user);
+
+        if (categoryId.equals(11L)) {
+            budgetService.updateBalance(userId, BigDecimal.valueOf(amount));
+        } else {
+            BigDecimal negativeAmount = BigDecimal.valueOf(amount).negate();
+            budgetService.updateBalance(userId, negativeAmount);
+        }
+
+        transactionService.save(newTransaction);
+
         return "redirect:/wallet";
     }
 }
