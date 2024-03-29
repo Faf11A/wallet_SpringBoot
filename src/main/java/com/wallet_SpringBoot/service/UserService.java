@@ -44,4 +44,7 @@ public class UserService {
         User user = repository.findByLogin(login);
         return user.getId();
     }
+    public boolean isUserExistsByLogin(String login) {
+        return repository.findByLogin(login) != null;
+    }
 }

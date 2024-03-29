@@ -10,7 +10,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+
+import static java.time.ZoneId.systemDefault;
 
 @Data
 @NoArgsConstructor
@@ -37,10 +42,17 @@ public class UserDetails {
     @Email
     @NotBlank
     @Size(max = 255)
-
     private String email;
 
     private Date birthDate;
+
+    public UserDetails(User user, String firstName, String lastName, String email, Date birthDate){
+        this.user = user;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDate = birthDate;
+    }
 }
 
 

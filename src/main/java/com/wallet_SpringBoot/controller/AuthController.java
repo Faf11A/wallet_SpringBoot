@@ -1,5 +1,6 @@
 package com.wallet_SpringBoot.controller;
 
+import com.wallet_SpringBoot.service.DemoUser;
 import com.wallet_SpringBoot.model.Category;
 import com.wallet_SpringBoot.model.User;
 import com.wallet_SpringBoot.model.UserDetails;
@@ -29,12 +30,15 @@ public class AuthController {
     BudgetService budgetService;
     @Autowired
     TransactionService transactionService;
+    @Autowired
+    DemoUser demoUser;
 
     //show login page
     @GetMapping("/login")
     public String showLoginForm(Model model, @RequestParam(value = "mode", defaultValue = "login") String mode) {
         model.addAttribute("mode", mode);
         categoryService.autoFillCategories();
+        demoUser.CreateDemoUser();
         return "login";
     }
 
