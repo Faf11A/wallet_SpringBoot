@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "users")
 public class User{
+    @Getter
     @Id
     @GeneratedValue
     private Long id;
@@ -27,4 +29,10 @@ public class User{
     @NotBlank
     @Size(min = 4, max = 20)
     private String password;
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
 }

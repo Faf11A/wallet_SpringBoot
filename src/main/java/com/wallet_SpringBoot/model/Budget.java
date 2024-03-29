@@ -25,4 +25,10 @@ public class Budget {
     private String name;
 
     private BigDecimal amount;
+
+    public Budget(User user, String name, BigDecimal amount){
+        this.user = user;
+        this.name = name;
+        this.amount = amount;
+    }
 }

@@ -24,7 +24,22 @@ public class Goal {
     private User user;
 
     private String goalName;
+
     private BigDecimal currentAmount;
+
     private BigDecimal targetAmount;
+
     private LocalDate targetDate;
+
+    public Goal(User user,
+                String goalName,
+                BigDecimal currentAmount,
+                BigDecimal targetAmount,
+                LocalDate targetDate){
+        this.user = user;
+        this.goalName = goalName;
+        this.currentAmount = currentAmount;
+        this.targetAmount = targetAmount;
+        this.targetDate = targetDate;
+    }
 }
